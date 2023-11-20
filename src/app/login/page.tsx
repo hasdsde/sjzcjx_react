@@ -1,13 +1,14 @@
 'use client'
-import Button from '@mui/joy/Button';
+
+import {Button} from "@chakra-ui/react";
 
 export default function LoginPage() {
 
-    const LoginComponent = () =>{
+    const LoginComponent = () => {
         return (
-            <div className={'w-5/6 h-2/4 max-h-[400px] max-w-[600px] min-h-[300px]'}>
-               <div>登录</div>
-                <Button variant="solid" color="primary">Button</Button>
+            <div className={'bg-orange w-5/6 h-2/4 max-h-[400px] max-w-[600px] min-h-[300px]'}>
+                <div>登录</div>
+                <Button colorScheme='blue'>Button</Button>
             </div>
         )
     }
