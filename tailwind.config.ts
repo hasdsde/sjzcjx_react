@@ -28,7 +28,7 @@ const config: Config = {
         xl: '1440px',
       },
       colors: {
-        'blue': '#1fb6ff',
+        'blue': '#0b6bcb',
         'pink': '#ff49db',
         'orange': '#ff7849',
         'green': '#13ce66',
