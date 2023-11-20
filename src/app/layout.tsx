@@ -1,7 +1,7 @@
 import './globals.css'
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
-import {Providers} from "@/app/providers";
+import '@fontsource/inter';
 
 const inter = Inter({subsets: ['latin']})
 export const metadata: Metadata = {
@@ -14,22 +14,8 @@ export default function RootLayout({children,}: {
 }) {
     return (
         <html lang="en">
-        <head>
-            <script
-                dangerouslySetInnerHTML={{
-                    __html: `
-              const style = document.createElement('style')
-              style.innerHTML = '@layer base, mixins, components, modifiers, layout;'
-              style.setAttribute('type', 'text/css')
-              document.querySelector('head').prepend(style)
-            `
-                }}
-            />
-        </head>
         <body>
-        <Providers>
-            {children}
-        </Providers>
+        {children}
         </body>
         </html>
     )
