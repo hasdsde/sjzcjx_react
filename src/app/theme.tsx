@@ -6,13 +6,7 @@ export default extendTheme({
         light: {
             palette: {
                 // affects all Joy components that has `color="primary"` prop.
-                primary: {
-                    50: "#fffbeb",
-                    100: "#fef3c7",
-                    200: "#fde68a",
-                    // 300, 400, ..., 800,
-                    900: "#78350f",
-                },
+                primary: {},
             },
         },
         dark: {
@@ -33,7 +27,7 @@ export default extendTheme({
         },
     },
     fontFamily: {
-        display: "Inter, var(--joy-fontFamily-fallback)",
-        body: "Inter, var(--joy-fontFamily-fallback)",
+        display: "Inter,微软雅黑, var(--joy-fontFamily-fallback)",
+        body: "Inter,黑体, var(--joy-fontFamily-fallback)",
     },
 });
