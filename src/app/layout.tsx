@@ -3,8 +3,10 @@ import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
 import '@fontsource/inter';
 import {CssVarsProvider} from '@mui/joy/styles';
-import theme from "@/app/theme";
-import ColorInit from "@/app/colorinit";
+import theme from "@/app/_config/theme";
+import ColorInit from "@/app/_config/colorinit";
+import React from "react";
+import {ReduxProvider} from './_store/provider';
 
 const inter = Inter({subsets: ['latin']})
 export const metadata: Metadata = {
@@ -21,9 +23,11 @@ export default function RootLayout({children,}: {
         <body>
         <ColorInit/>
         {/*Joy UI theme*/}
-        <CssVarsProvider theme={theme} defaultMode="system">
-            {children}
-        </CssVarsProvider>
+        <ReduxProvider>
+            <CssVarsProvider theme={theme} defaultMode="system">
+                {children}
+            </CssVarsProvider>
+        </ReduxProvider>
         </body>
         </html>
     )

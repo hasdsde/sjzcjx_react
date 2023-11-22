@@ -11,9 +11,17 @@ import AlterDialog from "@/app/_component/AlterDialog";
 
 
 export default function LoginPage() {
+
+    const [userId, setUserId] = useState("")
+    const [password, setPassword] = useState("")
+
     const theme = useTheme();
     const router = useRouter()
 
+    const handleLogin = () => {
+        console.log(userId)
+        console.log(password)
+    }
     const handleHome = () => {
         router.push("/home")
     }
@@ -38,11 +46,13 @@ export default function LoginPage() {
                         placeholder="账户名"
                         size="lg"
                         variant="outlined"
+                        onChange={(val) => setUserId(val.target.value)}
                     />
                     <Input
                         className={"w-4/5"}
                         placeholder="密码"
                         size="lg"
+                        onChange={(val) => setPassword(val.target.value)}
                         variant="outlined"
                     />
                 </div>

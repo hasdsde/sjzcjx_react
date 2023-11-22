@@ -1,4 +1,5 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project bootstrapped
+with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
@@ -7,6 +8,7 @@ npm install
 
 npm run dev
 ```
+
 启动地址 http://localhost:3000
 
 样式:
@@ -24,3 +26,6 @@ github:https://github.com/mui/material-ui
 Google icons:
 npm install @mui/icons-material
 doc:https://mui.com/joy-ui/integrations/icon-libraries/
+
+React-Resux
+doc：https://www.redux.org.cn/
