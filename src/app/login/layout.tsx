@@ -1,5 +1,6 @@
 'use client'
 import AlterDialog from "../_component/AlterDialog"
+import SnackBar from "../_component/SnackBar"
 
 export default function PageLayout({
     children,
@@ -10,6 +11,7 @@ export default function PageLayout({
         <>
             {children}
             <AlterDialog></AlterDialog>
+            <SnackBar></SnackBar>
         </>
     )
 }

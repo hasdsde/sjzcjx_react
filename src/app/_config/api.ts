@@ -1,6 +1,10 @@
-import { useAppSelector } from "@/app/_store/store";
-
 let BaseUrl = "http://127.0.0.1:8080"
+
+export type BaseApi = {
+    code: number,
+    data: object,
+    msg: string
+}
 
 export async function Api(url: string, options: RequestInit = {}): Promise<any> {
 
@@ -14,7 +18,6 @@ export async function Api(url: string, options: RequestInit = {}): Promise<any> 
     const response = await fetch(BaseUrl + url, {
         ...options, headers
     })
-
     if (response.ok) {
         const contentType = response.headers.get("Content-Type");
         if (contentType && contentType.includes("application/json")) {
