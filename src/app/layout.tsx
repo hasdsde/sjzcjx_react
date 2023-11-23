@@ -7,8 +7,6 @@ import theme from "@/app/_config/theme";
 import ColorInit from "@/app/_config/colorinit";
 import React from "react";
 import { ReduxProvider } from './_store/provider';
-import { useAppSelector } from './_store/store';
-import AlterDialogTest from './_component/AlterDialogTest';
 
 const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {

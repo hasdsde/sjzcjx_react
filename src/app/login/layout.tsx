@@ -1,5 +1,5 @@
 'use client'
-import AlterDialogTest from "../_component/AlterDialogTest"
+import AlterDialog from "../_component/AlterDialog"
 
 export default function PageLayout({
     children,
@@ -9,7 +9,7 @@ export default function PageLayout({
     return (
         <>
             {children}
-            <AlterDialogTest></AlterDialogTest>
+            <AlterDialog></AlterDialog>
         </>
     )
 }

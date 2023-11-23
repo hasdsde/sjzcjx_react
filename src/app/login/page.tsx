@@ -6,12 +6,11 @@ import { Box, IconButton } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import { Input } from "@mui/joy";
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useState } from "react";
-import AlterDialog from "@/app/_component/AlterDialog";
-import { AppDiapatch, useAppSelector } from "../_store/store";
+import { useState } from "react";
+import { AppDiapatch } from "../_store/store";
 import { useDispatch } from "react-redux";
-import { setAlterDialog } from "../_store/sign-slice";
-import { login } from "../_store/auth-slice";
+import { openAlterDialog } from "../_store/sign-slice";
+
 
 export default function LoginPage() {
 
@@ -34,7 +33,7 @@ export default function LoginPage() {
         //     console.log(res)
         // })
 
-        dispatch(setAlterDialog(open))
+        dispatch(openAlterDialog({ title: "提示", context: "你打开了窗口" }))
 
     }
     const handleHome = () => {

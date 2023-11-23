@@ -1,7 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 
+type AlterDialog = {
+    open: boolean,
+    title: string,
+    context: string
+}
+
 type SignState = {
-    alterDialog: boolean
+    alterDialog: AlterDialog
 }
 type InitialState = {
     value: SignState
@@ -9,7 +15,11 @@ type InitialState = {
 
 const initialState: InitialState = {
     value: {
-        alterDialog: false
+        alterDialog: {
+            open: false,
+            title: "提示",
+            context: ""
+        }
     } as SignState
 } as InitialState
 
@@ -17,16 +27,23 @@ export const sign = createSlice({
     name: "sign",
     initialState: initialState,
     reducers: {
-        setAlterDialog: (state, action: PayloadAction<boolean>) => {
+        openAlterDialog: (state, action: PayloadAction<{ title: string, context: string }>) => {
             return {
                 value: {
-                    alterDialog: action.payload
+                    alterDialog: {
+                        open: true,
+                        title: action.payload.title,
+                        context: action.payload.context
+                    }
                 }
             }
         },
+        closeAlterDialog: () => {
+            return initialState
+        }
     }
 
 })
 
-export const { setAlterDialog } = sign.actions
+export const { openAlterDialog, closeAlterDialog } = sign.actions
 export default sign.reducer

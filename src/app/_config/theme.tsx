@@ -1,5 +1,5 @@
 "use client";
-import {extendTheme} from "@mui/joy/styles";
+import { extendTheme } from "@mui/joy/styles";
 
 export default extendTheme({
     colorSchemes: {
@@ -21,6 +21,12 @@ export default extendTheme({
         h1: {
             background:
                 "linear-gradient(-30deg, var(--joy-palette-primary-700), var(--joy-palette-primary-400))",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            fontWeight: "bold",
+        },
+        h2: {
+            background: "#0B6BCB",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             fontWeight: "bold",
