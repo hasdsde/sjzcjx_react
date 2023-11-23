@@ -1,15 +1,15 @@
-import {useAppSelector} from "@/app/_store/store";
+import { useAppSelector } from "@/app/_store/store";
 
-let BaseUrl = "127.0.0.1:8080"
+let BaseUrl = "http://127.0.0.1:8080"
 
-export async function useFetch(url: string, options: RequestInit = {}): Promise<any> {
+export async function Api(url: string, options: RequestInit = {}): Promise<any> {
 
-    const userInfo = useAppSelector((state) => state.authReducer)
     const headers = new Headers(options.headers)
 
-    if (userInfo.value.token != "") {
-        headers.set("token", userInfo.value.token)
-    }
+    // if (userInfo.value.token != "") {
+    //     headers.set("token", userInfo.value.token)
+    // }
+    headers.set('Content-Type', 'application/json')
 
     const response = await fetch(BaseUrl + url, {
         ...options, headers
