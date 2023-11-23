@@ -1,4 +1,5 @@
-import type {Config} from "tailwindcss";
+import { url } from "inspector";
+import type { Config } from "tailwindcss";
 
 const config: Config = {
     content: [
@@ -17,6 +18,7 @@ const config: Config = {
                 "6": "48px",
             },
             backgroundImage: {
+                'homePage': "url('https://img.hasdsd.cn/img/bg.jpg')",
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
                 "gradient-conic":
                     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
