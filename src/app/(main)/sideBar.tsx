@@ -14,7 +14,8 @@ import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 import React, { useEffect, useState } from 'react';
 import { Api, BaseApi } from '@/app/_config/api';
 import { useDispatch } from 'react-redux';
-
+import { Link } from '@mui/joy';
+import NextLink from 'next/link';
 export default function SideBar() {
     const [currentMenu, changeCurrentMenu] = useState("1")//当前菜单选项
 
@@ -23,16 +24,24 @@ export default function SideBar() {
     const handleMenuChange = (event: React.SyntheticEvent, newValue: string,) => {
         changeCurrentMenu(newValue)
         getMenus(newValue)
+        localStorage.setItem("currentMenu", newValue)
     }
 
     useEffect(() => {
-        getMenus("1")
+        const cm: any = localStorage.getItem("currentMenu")
+        if (cm == null) {
+            localStorage.setItem("currentMenu", "1")
+            changeCurrentMenu("1")
+        }
+        changeCurrentMenu(cm)
+        getMenus(cm)
     }, []);
 
 
     function getMenus(value: string) {
         if (value == "1") {
             Api("/psort/list", { method: 'GET' }).then((res: BaseApi) => {
+                console.log(res.data)
                 const menu: any = generateMenuBar(res.data)
                 setMenu(menu)
             })
@@ -41,14 +50,14 @@ export default function SideBar() {
             const managerMenus: object[] = [
                 {
                     name: "通用", children: [
-                        { name: "URL管理" },
-                        { name: "分类管理" },
-                        { name: "文件管理" },
-                        { name: "资源管理" },
+                        { name: "URL管理", link: "/url" },
+                        { name: "分类管理", link: "/sort" },
+                        { name: "文件管理", link: "/file" },
+                        { name: "资源管理", link: "/resource" },
                     ]
                 }, {
                     name: "Admin", children: [
-                        { name: "用户管理" },
+                        { name: "用户管理", link: "/user" },
                     ]
                 },
             ]
@@ -60,16 +69,21 @@ export default function SideBar() {
         return menu.map((item: any) => {
             return (
                 <>
-                    <ListSubheader>{item.name}</ListSubheader>
+                    <ListSubheader key={item.id}>{item.name}</ListSubheader>
                     {
                         item.children.map((child: any) => {
+                            if (child.link == undefined) {
+                                child.link = "/home"
+                            }
                             return (
-                                <ListItemButton>
-                                    <ListItemDecorator>
-                                        <PieChart />
-                                    </ListItemDecorator>
-                                    {child.name}
-                                </ListItemButton>
+                                <NextLink href={child.link} key={child.id}>
+                                    <ListItemButton>
+                                        <ListItemDecorator>
+                                            <PieChart />
+                                        </ListItemDecorator>
+                                        {child.name}
+                                    </ListItemButton>
+                                </NextLink>
                             )
                         })
                     }
@@ -91,8 +105,9 @@ export default function SideBar() {
                 >
                     <Select
                         variant="outlined"
-                        defaultValue="1"
+                        // defaultValue={"1"}
                         size="sm"
+                        value={currentMenu}
                         startDecorator={
                             <Sheet
                                 variant="solid"
@@ -122,13 +137,13 @@ export default function SideBar() {
                         }}
                     >
                         {menu}
-                        <ListItem nested>
+                        {/* <ListItem nested>
                             <ListSubheader>更多</ListSubheader>
                             <List>
                                 <ListItemButton>关于</ListItemButton>
                                 <ListItemButton>Github</ListItemButton>
                             </List>
-                        </ListItem>
+                        </ListItem> */}
                     </List>
                 </Sheet>
             </Box>
