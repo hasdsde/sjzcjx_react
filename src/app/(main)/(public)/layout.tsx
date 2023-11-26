@@ -7,6 +7,8 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import HomeIcon from '@mui/icons-material/Home';
 import React from "react";
 import SideBar from "./sideBar";
+import AlterDialog from "@/app/_component/AlterDialog";
+import SnackBar from "@/app/_component/SnackBar";
 
 export default function Page({ children }: { children: React.ReactNode }) {
     const [color, setColor] = React.useState<ColorPaletteProp>('primary');
@@ -117,11 +119,14 @@ export default function Page({ children }: { children: React.ReactNode }) {
                     </Box>
                 </Sheet>
             </div>
-            <div className="main flex-1">
+            <div className="main flex-1 flex">
                 <SideBar />
-                {children}
+                <div className="p-2 box-border flex-1">
+                    {children}
+                </div>
             </div>
+            <AlterDialog></AlterDialog>
+            <SnackBar></SnackBar>
         </div>
-
     )
 }

@@ -1,8 +1,8 @@
 let BaseUrl = "http://127.0.0.1:8080"
 
 export type BaseApi = {
-    code: number,
-    data: object,
+    code: number | any,
+    data: object | any,
     msg: string
 }
 
@@ -21,9 +21,9 @@ export async function Api(url: string, options: RequestInit = {}): Promise<any> 
     if (response.ok) {
         const contentType = response.headers.get("Content-Type");
         if (contentType && contentType.includes("application/json")) {
-            return await response.json();
+            return response.json();
         } else {
-            return await response.text()
+            return response.text()
             // Manage other Content-Type cases or when Content-Type is absent
         }
     } else {

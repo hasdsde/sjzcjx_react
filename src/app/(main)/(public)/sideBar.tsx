@@ -1,31 +1,41 @@
 'use client'
-import { ColorPaletteProp } from '@mui/joy/styles';
-import Avatar from '@mui/joy/Avatar';
-import Badge, { badgeClasses } from '@mui/joy/Badge';
 import Box from '@mui/joy/Box';
-import Card from '@mui/joy/Card';
-import CardContent from '@mui/joy/CardContent';
-import CircularProgress from '@mui/joy/CircularProgress';
-import Chip from '@mui/joy/Chip';
-import IconButton from '@mui/joy/IconButton';
 import List from '@mui/joy/List';
 import ListItem from '@mui/joy/ListItem';
 import ListSubheader from '@mui/joy/ListSubheader';
 import ListItemButton from '@mui/joy/ListItemButton';
 import ListItemDecorator from '@mui/joy/ListItemDecorator';
-import Typography from '@mui/joy/Typography';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import Sheet from '@mui/joy/Sheet';
 import PieChart from '@mui/icons-material/PieChart';
-import SmsIcon from '@mui/icons-material/Sms';
 import PersonIcon from '@mui/icons-material/Person';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
-import AddIcon from '@mui/icons-material/Add';
-import ColorLensRoundedIcon from '@mui/icons-material/ColorLensRounded';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Api, BaseApi } from '@/app/_config/api';
+import { useDispatch } from 'react-redux';
+
 export default function SideBar() {
-    const [color, setColor] = React.useState<ColorPaletteProp>('neutral');
+    const [currentMenu, changeMenu] = useState("1")//当前菜单选项
+
+    const [menu, setMenu] = useState("")
+    const dispatch = useDispatch()
+    const handleMenuChange = (event: React.SyntheticEvent, newValue: string,) => {
+        changeMenu(newValue)
+    }
+
+    useEffect(() => {
+        getMenus()
+    }, []);
+
+    function getMenus() {
+        if (currentMenu == "1") {
+            Api("/psort/list", { method: 'GET' }).then((res: BaseApi) => {
+                setMenu(res.code)
+            })
+        }
+    }
+
     return (
         <>
             <Box sx={{ display: 'flex', borderRadius: 'sm', overflow: 'auto', height: "100%" }}>
@@ -34,11 +44,6 @@ export default function SideBar() {
                     invertedColors
                     sx={{
                         p: 2,
-                        // ...(color !== 'neutral' && {
-                        //     bgcolor: `${color}.800`,
-                        // }),
-                        bgcolor: 'grey',
-                        height: "100%"
                     }}
                 >
                     <Select
@@ -59,9 +64,11 @@ export default function SideBar() {
                             </Sheet>
                         }
                         sx={{ py: 1 }}
+                        //@ts-ignore 只有这样会生效
+                        onChange={handleMenuChange}
                     >
-                        <Option value="1">资源列表</Option>
-                        <Option value="2">编辑页面</Option>
+                        <Option value="1">资源分类</Option>
+                        <Option value="2">资源管理</Option>
                     </Select>
                     <List
                         sx={{
@@ -71,26 +78,26 @@ export default function SideBar() {
                             minWidth: 200,
                         }}
                     >
+                        {menu}
+                        <ListSubheader>WEB网站</ListSubheader>
                         <ListItemButton>
                             <ListItemDecorator>
                                 <PieChart />
                             </ListItemDecorator>
-                            Dashboard
+                            全部
                         </ListItemButton>
-                        <ListItemButton selected variant="soft">
+                        <ListItemButton>
                             <ListItemDecorator>
-                                <SmsIcon />
+                                <PersonIcon />
                             </ListItemDecorator>
-                            Chat
-                            <Chip
-                                data-skip-inverted-colors
-                                size="sm"
-                                color="warning"
-                                variant="soft"
-                                sx={{ ml: 'auto' }}
-                            >
-                                5
-                            </Chip>
+                            Team
+                        </ListItemButton>
+                        <ListSubheader>Windows软件</ListSubheader>
+                        <ListItemButton>
+                            <ListItemDecorator>
+                                <PieChart />
+                            </ListItemDecorator>
+                            全部
                         </ListItemButton>
                         <ListItemButton>
                             <ListItemDecorator>
