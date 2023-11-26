@@ -16,24 +16,67 @@ import { Api, BaseApi } from '@/app/_config/api';
 import { useDispatch } from 'react-redux';
 
 export default function SideBar() {
-    const [currentMenu, changeMenu] = useState("1")//当前菜单选项
+    const [currentMenu, changeCurrentMenu] = useState("1")//当前菜单选项
 
     const [menu, setMenu] = useState("")
     const dispatch = useDispatch()
     const handleMenuChange = (event: React.SyntheticEvent, newValue: string,) => {
-        changeMenu(newValue)
+        changeCurrentMenu(newValue)
+        getMenus(newValue)
     }
 
     useEffect(() => {
-        getMenus()
+        getMenus("1")
     }, []);
 
-    function getMenus() {
-        if (currentMenu == "1") {
+
+    function getMenus(value: string) {
+        if (value == "1") {
             Api("/psort/list", { method: 'GET' }).then((res: BaseApi) => {
-                setMenu(res.code)
+                const menu: any = generateMenuBar(res.data)
+                setMenu(menu)
             })
         }
+        if (value == "2") {
+            const managerMenus: object[] = [
+                {
+                    name: "通用", children: [
+                        { name: "URL管理" },
+                        { name: "分类管理" },
+                        { name: "文件管理" },
+                        { name: "资源管理" },
+                    ]
+                }, {
+                    name: "Admin", children: [
+                        { name: "用户管理" },
+                    ]
+                },
+            ]
+            const menu: any = generateMenuBar(managerMenus)
+            setMenu(menu)
+        }
+    }
+    function generateMenuBar(menu: object[]) {
+        return menu.map((item: any) => {
+            return (
+                <>
+                    <ListSubheader>{item.name}</ListSubheader>
+                    {
+                        item.children.map((child: any) => {
+                            return (
+                                <ListItemButton>
+                                    <ListItemDecorator>
+                                        <PieChart />
+                                    </ListItemDecorator>
+                                    {child.name}
+                                </ListItemButton>
+                            )
+                        })
+                    }
+                </>
+            )
+        }
+        )
     }
 
     return (
@@ -79,32 +122,6 @@ export default function SideBar() {
                         }}
                     >
                         {menu}
-                        <ListSubheader>WEB网站</ListSubheader>
-                        <ListItemButton>
-                            <ListItemDecorator>
-                                <PieChart />
-                            </ListItemDecorator>
-                            全部
-                        </ListItemButton>
-                        <ListItemButton>
-                            <ListItemDecorator>
-                                <PersonIcon />
-                            </ListItemDecorator>
-                            Team
-                        </ListItemButton>
-                        <ListSubheader>Windows软件</ListSubheader>
-                        <ListItemButton>
-                            <ListItemDecorator>
-                                <PieChart />
-                            </ListItemDecorator>
-                            全部
-                        </ListItemButton>
-                        <ListItemButton>
-                            <ListItemDecorator>
-                                <PersonIcon />
-                            </ListItemDecorator>
-                            Team
-                        </ListItemButton>
                         <ListItem nested>
                             <ListSubheader>更多</ListSubheader>
                             <List>
