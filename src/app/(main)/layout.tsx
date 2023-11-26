@@ -121,7 +121,7 @@ export default function Page({ children }: { children: React.ReactNode }) {
             </div>
             <div className="main flex-1 flex">
                 <SideBar />
-                <div className="p-2 box-border flex-1">
+                <div className="p-[1.5rem] box-border flex-1 w-[50%]">
                     {children}
                 </div>
             </div>

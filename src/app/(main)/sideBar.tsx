@@ -49,17 +49,18 @@ export default function SideBar() {
         if (value == "2") {
             const managerMenus: object[] = [
                 {
-                    name: "通用", children: [
-                        { name: "URL管理", link: "/url" },
-                        { name: "分类管理", link: "/sort" },
-                        { name: "文件管理", link: "/file" },
-                        { name: "资源管理", link: "/resource" },
-                    ]
-                }, {
                     name: "Admin", children: [
                         { name: "用户管理", link: "/user" },
                     ]
                 },
+                {
+                    name: "通用", children: [
+                        { name: "分类管理", link: "/sort" },
+                        { name: "资源管理", link: "/resource" },
+                        { name: "URL管理", link: "/url" },
+                        { name: "文件管理", link: "/file" },
+                    ]
+                }
             ]
             const menu: any = generateMenuBar(managerMenus)
             setMenu(menu)

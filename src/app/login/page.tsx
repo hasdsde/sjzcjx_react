@@ -41,7 +41,7 @@ export default function LoginPage() {
                 localStorage.removeItem("userInfo")
                 localStorage.removeItem("token")
                 localStorage.setItem("userInfo", JSON.stringify(res.data.userInfo))
-                localStorage.setItem("token", JSON.stringify(res.data.token))
+                localStorage.setItem("token", res.data.token)
                 dispatch(openSnkckBar({ color: 'success', context: "登录成功" }))
                 router.push('/home')
             } else {

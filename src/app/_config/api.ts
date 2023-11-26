@@ -10,9 +10,11 @@ export async function Api(url: string, options: RequestInit = {}): Promise<any> 
 
     const headers = new Headers(options.headers)
 
-    // if (userInfo.value.token != "") {
-    //     headers.set("token", userInfo.value.token)
-    // }
+    const token: string = localStorage.getItem("token") ?? ""
+    if (token != "") {
+        headers.set("token", token)
+    }
+
     headers.set('Content-Type', 'application/json')
 
     const response = await fetch(BaseUrl + url, {
