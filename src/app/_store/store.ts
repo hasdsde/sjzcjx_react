@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from './auth-slice'
 import signReducer from './sign-slice'
+import formReducer from './form-slice'
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 export const store = configureStore({
     reducer: {
         authReducer,
-        signReducer
+        signReducer,
+        formReducer
     }
 })
 export type RootState = ReturnType<typeof store.getState>

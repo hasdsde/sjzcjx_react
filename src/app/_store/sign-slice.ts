@@ -6,6 +6,13 @@ type AlterDialog = {
     title: string,
     context: string
 }
+type ConfirmDialog = {
+    open: boolean,
+    title: string,
+    context: string,
+    url: string,
+    id: string
+}
 type SnackBar = {
     open: boolean,
     color: "primary" | "neutral" | "danger" | "success" | "warning",
@@ -13,7 +20,8 @@ type SnackBar = {
 }
 type SignState = {
     alterDialog: AlterDialog,
-    snackBar: SnackBar
+    snackBar: SnackBar,
+    confirmDialog: ConfirmDialog
 }
 type InitialState = {
     value: SignState
@@ -25,6 +33,13 @@ const initialState: InitialState = {
             open: false,
             title: "提示",
             context: ""
+        },
+        confirmDialog: {
+            open: false,
+            title: "",
+            context: "",
+            url: "",
+            id: ""
         },
         snackBar: {
             open: false,
@@ -41,6 +56,7 @@ export const sign = createSlice({
         openAlterDialog: (state, action: PayloadAction<{ title: string, context: string }>) => {
             return {
                 value: {
+                    ...state.value,
                     alterDialog: {
                         open: true,
                         title: action.payload.title,
@@ -50,12 +66,30 @@ export const sign = createSlice({
                 }
             }
         },
+        openConfirmDialog: (state, action: PayloadAction<{ title: string, context: string, url: string, id: string }>) => {
+            return {
+                value: {
+                    ...state.value,
+                    confirmDialog: {
+                        open: true,
+                        title: action.payload.title,
+                        context: action.payload.context,
+                        url: action.payload.url,
+                        id: action.payload.id
+                    }
+                }
+            }
+        },
         closeAlterDialog: () => {
+            return initialState
+        },
+        closeConfirmDialog: () => {
             return initialState
         },
         openSnkckBar: (state, action: PayloadAction<{ color: "primary" | "neutral" | "danger" | "success" | "warning", context: string }>) => {
             return {
                 value: {
+                    ...state.value,
                     alterDialog: state.value.alterDialog,
                     snackBar: {
                         open: true,
@@ -68,6 +102,7 @@ export const sign = createSlice({
         closeSnackBar: (state) => {
             return {
                 value: {
+                    ...state.value,
                     alterDialog: state.value.alterDialog,
                     snackBar: {
                         ...state.value.snackBar,
@@ -80,5 +115,5 @@ export const sign = createSlice({
 
 })
 
-export const { openAlterDialog, closeAlterDialog, openSnkckBar, closeSnackBar } = sign.actions
+export const { openAlterDialog, closeAlterDialog, openSnkckBar, closeSnackBar, openConfirmDialog, closeConfirmDialog } = sign.actions
 export default sign.reducer

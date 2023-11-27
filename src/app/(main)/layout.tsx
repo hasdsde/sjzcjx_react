@@ -9,6 +9,7 @@ import React from "react";
 import SideBar from "./sideBar";
 import AlterDialog from "@/app/_component/AlterDialog";
 import SnackBar from "@/app/_component/SnackBar";
+import ConfirmDialog from "../_component/confirmDialog";
 
 export default function Page({ children }: { children: React.ReactNode }) {
     const [color, setColor] = React.useState<ColorPaletteProp>('primary');
@@ -126,6 +127,7 @@ export default function Page({ children }: { children: React.ReactNode }) {
                 </div>
             </div>
             <AlterDialog></AlterDialog>
+            <ConfirmDialog></ConfirmDialog>
             <SnackBar></SnackBar>
         </div>
     )

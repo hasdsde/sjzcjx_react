@@ -3,6 +3,7 @@ import Button from "@mui/joy/Button";
 import { AppDiapatch, useAppSelector } from "../_store/store";
 import { useDispatch } from "react-redux";
 import { closeAlterDialog } from "../_store/sign-slice";
+import { Api } from "../_config/api";
 
 
 export default function AlterDialog() {

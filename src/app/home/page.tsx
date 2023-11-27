@@ -50,7 +50,7 @@ export default function Page() {
                             </div>
                         </div>
                         <div className="bottom h-1/2 flex flex-wrap justify-around">
-                            <div onClick={() => router.push("/list")} className="h-[45%] w-[31%] active:scale-[0.99] cursor-pointer rounded-md hover:scale-[1.01] hover:opacity-90 duration-300 bg-white dark:bg-black text-black dark:text-white   text-center flex justify-center items-center">
+                            <div onClick={() => router.push('/list')} className="h-[45%] w-[31%] active:scale-[0.99] cursor-pointer rounded-md hover:scale-[1.01] hover:opacity-90 duration-300 bg-white dark:bg-black text-black dark:text-white   text-center flex justify-center items-center">
                                 <CloudDownloadIcon /> &nbsp; 资源
                             </div>
                             <div className="h-[45%] w-[31%] active:scale-[0.99] cursor-pointer rounded-md hover:scale-[1.01] hover:opacity-90 duration-300 bg-white dark:bg-black text-black dark:text-white   text-center flex justify-center items-center">
