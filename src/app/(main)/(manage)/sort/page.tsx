@@ -99,45 +99,49 @@ function Row(props: {
                             sx={{ p: 1, pl: 6, boxShadow: 'inset 0 3px 6px 0 rgba(0 0 0 / 0.08)' }}
                         >
                             <Typography level="title-md" component="div">
-                                该分类下的子类
+                                {row.children.length == 0 ? '该分类下没有子类' : ''}
                             </Typography>
-                            <Table
-                                borderAxis="none"
-                                size="sm"
-                                aria-label="purchases"
-                            >
-                                <thead>
-                                    <tr>
-                                        <th >分类名称</th>
-                                        <th >英文名</th>
-                                        <th>id</th>
-                                        <th>操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {row.children.map((child) => (
-                                        <tr key={child.id}>
-                                            <th>{child.name}</th>
-                                            <td>{child.sortName}</td>
-                                            <td>{child.id}</td>
-                                            <td>
-                                                <Box sx={{ display: 'flex', gap: 1 }}>
-                                                    <Button size="sm" variant="plain" color="success" sx={{ marginRight: ".2rem" }}
-                                                        onClick={() => {
-                                                            props.setTitle("修改")
-                                                            dispatch(setSort({ id: child.id, name: child.name, sortName: child.sortName, parent: row.id }))
-                                                            props.setOpenDialog(true);
-                                                        }}>修改</Button>
-                                                    <Button size="sm" variant="plain" color="danger" sx={{ marginRight: ".2rem" }}
-                                                        onClick={() => {
-                                                            dispatch(openConfirmDialog({ title: "确认", context: "确定要删除吗", url: "/sort/delete", id: child.id }))
-                                                        }}>删除</Button>
-                                                </Box>
-                                            </td>
+                            {
+                                row.children.length != 0 &&
+                                <Table
+                                    borderAxis="none"
+                                    size="sm"
+                                    aria-label="purchases"
+                                >
+                                    <thead>
+                                        <tr>
+                                            <th >分类名称</th>
+                                            <th >英文名</th>
+                                            <th>id</th>
+                                            <th>操作</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
+                                    </thead>
+                                    <tbody>
+                                        {row.children.map((child) => (
+                                            <tr key={child.id}>
+                                                <th>{child.name}</th>
+                                                <td>{child.sortName}</td>
+                                                <td>{child.id}</td>
+                                                <td>
+                                                    <Box sx={{ display: 'flex', gap: 1 }}>
+                                                        <Button size="sm" variant="plain" color="success" sx={{ marginRight: ".2rem" }}
+                                                            onClick={() => {
+                                                                props.setTitle("修改")
+                                                                dispatch(setSort({ id: child.id, name: child.name, sortName: child.sortName, parent: row.id }))
+                                                                props.setOpenDialog(true);
+                                                            }}>修改</Button>
+                                                        <Button size="sm" variant="plain" color="danger" sx={{ marginRight: ".2rem" }}
+                                                            onClick={() => {
+                                                                dispatch(openConfirmDialog({ title: "确认", context: "确定要删除吗", url: "/sort/delete", id: child.id }))
+                                                            }}>删除</Button>
+                                                    </Box>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            }
+
                         </Sheet>
                     )}
                 </td>
